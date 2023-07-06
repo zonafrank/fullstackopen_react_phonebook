@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const Person = require("./models/person");
 const middleware = require("./middleware");
 
-mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
@@ -45,16 +44,6 @@ process.on("exit", () => {
 });
 
 let persons = require("./persons.json");
-
-const getNextId = () => {
-  let currentIds = persons.map((p) => p.id);
-  let id;
-  do {
-    id = Math.floor(Math.random() * 1000000);
-  } while (currentIds.includes(id));
-
-  return id;
-};
 
 const app = express();
 app.use(express.static("build"));
