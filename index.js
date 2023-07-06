@@ -43,14 +43,12 @@ process.on("exit", () => {
   });
 });
 
-let persons = require("./persons.json");
-
 const app = express();
 app.use(express.static("build"));
 app.use(cors());
 app.use(express.json());
 
-morgan.token("body", (req, res) => JSON.stringify(req.body));
+morgan.token("body", (req) => JSON.stringify(req.body));
 app.use(
   morgan(function (tokens, req, res) {
     return [
